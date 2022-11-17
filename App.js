@@ -1,8 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
+import { Video } from 'expo-av';
+import whaleshark from './assets/whaleshark.mp4';
 
 export default function App() {
+  const video = React.useRef(null);
   const [topShow, setTopShow] = useState(false);
   const [bottomShow, setBottomShow] = useState(false);
   const changeCenter = (locale) => {
@@ -19,8 +22,9 @@ export default function App() {
       {
         !topShow && !bottomShow? (
           <View className="items-center justify-center">
-            <Image source={{ uri: "https://www.oregonlive.com/resizer/sdwbSdFKcI0ht_0DqQ9NMQEJ9uM=/1280x0/smart/advancelocal-adapter-image-uploads.s3.amazonaws.com/expo.advance.net/img/bb90877c7a/width2048/11f_shark3.jpeg" }} style={{ width: 305, height: 159 }} />
-            <Text> neither </Text>
+            <Video ref={video} style={{width: 305, height: 159}} source={ whaleshark } 
+              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              />
           </View>
         ) :
         topShow ? (
