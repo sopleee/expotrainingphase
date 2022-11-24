@@ -6,6 +6,7 @@ import whaleshark from './assets/whaleshark.mp4';
 import turtle from './assets/seaturt.mp4';
 
 export default function App() {
+  var touches = [];
   const video = React.useRef(null);
   const [topShow, setTopShow] = useState(false);
   const [bottomShow, setBottomShow] = useState(false);
@@ -33,9 +34,17 @@ export default function App() {
     setTopShow(locale == 'Top');
     setBottomShow(locale == 'Bottom');
   };
-  return (
 
+  const handlePress = (evt) => {
+    const coords = [evt.nativeEvent.locationX, evt.nativeEvent.locationY]
+    touches.push(coords);
+    console.log(`${touches}`);
+  };
+  
+  return (
+    
     <View className="flex-1 items-center justify-center bg-white">
+     <TouchableOpacity onPress={(evt) => handlePress(evt) } >
       <Moving onShown={() => Alert.alert('Animation is done')} />
       <View>
         {(seconds !== 2) && <TouchableOpacity onPress={() => changeCenter('Top')}>
@@ -74,7 +83,7 @@ export default function App() {
         </View>
       </TouchableOpacity>}
       </View>
-      
+      </TouchableOpacity>
     </View>
   );
 }
