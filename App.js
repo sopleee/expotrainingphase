@@ -30,14 +30,14 @@ export default function App() {
         topShow ? (
           <View className="items-center justify-center">
             <Video ref={video} style={{width: 305, height: 159}} source={ whaleshark } 
-              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              resizeMode="contain" shouldPlay= {true} isMuted= {false} ignoreSilentSwitch={'ignore'}
               />
           </View>
         ) :
         bottomShow ? (
           <View className="items-center justify-center">
             <Video ref={video} style={{width: 305, height: 159}} source={ turtle } 
-              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              resizeMode="contain" shouldPlay= {true} isMuted= {false}
               />
           </View>
         ) 
