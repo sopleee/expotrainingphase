@@ -5,6 +5,7 @@ import { Video } from 'expo-av';
 import whaleshark from './assets/whaleshark.mp4';
 import turtle from './assets/seaturt.mp4';
 import * as FileSystem from 'expo-file-system';
+import * as Sharing from "expo-sharing";
 
 export default function App() {
   var touches = [];
@@ -52,13 +53,18 @@ export default function App() {
     // }
 }
 
+const doesBoth = (evt, locale) => {
+  handlePress(evt);
+  changeCenter(locale);
+}
+
   return (
     
     <View className="flex-1 items-center justify-center bg-white">
      <TouchableOpacity onPress={(evt) => handlePress(evt) } >
       <Moving onShown={() => Alert.alert('Animation is done')} />
       <View>
-        {(seconds !== 2) && <TouchableOpacity onPress={() => changeCenter('Top')}>
+        {(seconds !== 2) && <TouchableOpacity onPress={(evt) => doesBoth(evt, "Top")}>
         <View style={{ backgroundColor: "#A9B0BA", width: 390, height: 340, alignItems: 'center', justifyContent: 'center' }}>
           <Image source={{ uri: "https://www.aquablog.ca/wp-content/uploads/2016/05/Spot-prawn-main.jpg" }} style={{ width: 305, height: 159}} />
         </View>
@@ -88,7 +94,7 @@ export default function App() {
         ) 
       :null}
       <View>
-        {(seconds !== 1) && <TouchableOpacity onPress={() => changeCenter('Bottom')}>
+        {(seconds !== 1) && <TouchableOpacity onPress={(evt) => doesBoth(evt, "Bottom")}>
       <View style={{ backgroundColor: "#1D2C1B", width: 390, height: 340, alignItems: 'center', justifyContent: 'center' }}>
       <Image source={{ uri: "https://img.izismile.com/img/img3/20100606/640/the_fish_with_640_03.jpg" }} style={{ width: 305, height: 159 }} />
         </View>
