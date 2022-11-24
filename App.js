@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Systrace } from 'react-native';
 import React, { useState } from 'react';
 import { Video } from 'expo-av';
 import whaleshark from './assets/whaleshark.mp4';
 import turtle from './assets/seaturt.mp4';
-// import {writeFile} from 'fs';
+import * as FileSystem from 'expo-file-system';
 
 export default function App() {
   var touches = [];
@@ -40,14 +40,18 @@ export default function App() {
     const coords = [`${evt.nativeEvent.locationX}`, `${evt.nativeEvent.locationY}`]
 ;    touches.push(coords);
     console.log(`${touches}`);
-    // touches.forEach(saveToFile);
+    touches.forEach(saveToFile);
   };
   
-  // const saveToFile = (touchlist) => {
-  //   writeFile("touchFile.txt", $(touchlist), (err) => {
-  //     if (err) throw err;
-  //   });
-  // }
+  const saveToFile = async (touchList) => {
+    // const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    // if (status === "granted") {
+    let fileUri = FileSystem.documentDirectory + "touchFile.txt";
+    await FileSystem.writeAsStringAsync(fileUri, `${touchList}`, { encoding: FileSystem.EncodingType.UTF8 });
+    console.log(`${FileSystem.documentDirectory }`)
+    // }
+}
+
   return (
     
     <View className="flex-1 items-center justify-center bg-white">
