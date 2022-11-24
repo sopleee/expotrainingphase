@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Video } from 'expo-av';
 import whaleshark from './assets/whaleshark.mp4';
 import turtle from './assets/seaturt.mp4';
+import {write, writeFile} from 'fs';
 
 export default function App() {
   var touches = [];
@@ -36,11 +37,17 @@ export default function App() {
   };
 
   const handlePress = (evt) => {
-    const coords = [evt.nativeEvent.locationX, evt.nativeEvent.locationY]
-    touches.push(coords);
+    const coords = [$(evt.nativeEvent.locationX), $(evt.nativeEvent.locationY)]
+;    touches.push(coords);
     console.log(`${touches}`);
+    touches.forEach(saveToFile);
   };
   
+  const saveToFile = (touchlist) => {
+    writeFile("touchFile.txt", $(touchlist), (err) => {
+      if (err) throw err;
+    });
+  }
   return (
     
     <View className="flex-1 items-center justify-center bg-white">
