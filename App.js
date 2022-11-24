@@ -1,8 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import { Video } from 'expo-av';
+import whaleshark from './assets/whaleshark.mp4';
+import turtle from './assets/seaturt.mp4';
 
 export default function App() {
+  const video = React.useRef(null);
   const [topShow, setTopShow] = useState(false);
   const [bottomShow, setBottomShow] = useState(false);
   
@@ -44,20 +48,22 @@ export default function App() {
       {
         !topShow && !bottomShow? (
           <View className="items-center justify-center">
-            <Image source={{ uri: "https://www.oregonlive.com/resizer/sdwbSdFKcI0ht_0DqQ9NMQEJ9uM=/1280x0/smart/advancelocal-adapter-image-uploads.s3.amazonaws.com/expo.advance.net/img/bb90877c7a/width2048/11f_shark3.jpeg" }} style={{ width: 305, height: 159 }} />
+            <Image source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ1NNssV4AS_MEFv1x_DN7TpRCWL76YKOZeg&usqp=CAU" }} style={{ width: 305, height: 159 }} />
             <Text> neither </Text>
           </View>
         ) :
         topShow ? (
           <View className="items-center justify-center">
-            <Image source={{ uri: "https://www.mensjournal.com/wp-content/uploads/2014/03/CATERS_HAMMERHEAD_SHARKS_SURROUND_DIVER_FEEDING_TOUCHING_06.jpg?w=1200&h=1200&crop=1&quality=80&strip=all" }} style={{ width: 305, height: 159 }} />
-            <Text> yes top </Text>
+            <Video ref={video} style={{width: 305, height: 159}} source={ whaleshark } 
+              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              />
           </View>
         ) :
         bottomShow ? (
           <View className="items-center justify-center">
-            <Image source={{ uri: "https://media.greenmatters.com/brand-img/c7EPLoIej/0x0/shark-1645644297742.jpg" }} style={{ width: 305, height: 159 }} />
-            <Text> yes bottom </Text>
+            <Video ref={video} style={{width: 305, height: 159}} source={ turtle } 
+              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              />
           </View>
         ) 
       :null}
@@ -73,4 +79,11 @@ export default function App() {
   );
 }
 
+<<<<<<< HEAD
 {/* */}
+=======
+
+{/* <Video ref={video} style={{width: 305, height: 159}} source={ whaleshark } 
+              resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
+              /> */}
+>>>>>>> 9e56f13787f0fa70ccfb116d31283775f714173f
