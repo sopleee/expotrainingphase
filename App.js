@@ -79,11 +79,7 @@ export default function App() {
   );
 }
 
-<<<<<<< HEAD
-{/* */}
-=======
 
 {/* <Video ref={video} style={{width: 305, height: 159}} source={ whaleshark } 
               resizeMode="contain" shouldPlay= {true} isMuted= {false} isLooping= {true}
               /> */}
->>>>>>> 9e56f13787f0fa70ccfb116d31283775f714173f
